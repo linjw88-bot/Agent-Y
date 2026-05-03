@@ -25,6 +25,9 @@ Agent Y is a decision support system based on top-case thinking patterns. It hel
 cd backend
 pip install -r requirements.txt
 uvicorn app.main:app --reload --port 8000
+
+# Run tests
+python -m pytest tests/ -v --tb=short
 ```
 
 ### Frontend
@@ -33,7 +36,7 @@ cd frontend
 npm install
 npm run dev      # development
 npm run build    # production build
-npm run test     # vitest tests
+npm test         # vitest tests (also: npm test -- --run)
 ```
 
 ### Database
@@ -42,6 +45,23 @@ cd database/seed_data
 python seed_db.py    # initialize database
 python init_knowledge.py
 ```
+
+## Testing
+
+### Backend Tests (pytest)
+```bash
+cd backend && python -m pytest tests/ -v
+```
+
+### Frontend Tests (vitest)
+```bash
+cd frontend && npm test -- --run
+```
+
+### CI Pipeline
+GitHub Actions runs on every push/PR (`.github/workflows/ci.yml`):
+- Backend: Python 3.11 + pytest
+- Frontend: Node 18 + vitest + build check
 
 ## Architecture
 
